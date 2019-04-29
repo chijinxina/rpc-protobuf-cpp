@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include <folly/init/Init.h>
+#include <folly/hash/FarmHash.h>
 #include <folly/executors/CPUThreadPoolExecutor.h>
 #include <folly/executors/IOThreadPoolExecutor.h>
 
@@ -172,9 +173,11 @@ public:
 
         int methodCnt = pSerDes->method_count();
 
-        //获取service id
-        uint32_t serviceId = 1;
-        std::cout<<"[RegisterService] -- "<<pSerDes->full_name()<<std::endl;
+        //获取service id 进行farmhash运算 将service name 转为 uint32
+        std::string serviceName = pSerDes->full_name();
+        uint32_t serviceId = folly::hash::farmhash::Hash32(serviceName.c_str(), serviceName.length());
+        //std::cout<<"[RegisterService] -- "<<pSerDes->full_name()<<std::endl;
+        //std::cout<<serviceID<<std::endl;
 
         ServiceData servicetmp;
 
@@ -190,7 +193,6 @@ public:
             methodtmp.response_proto= response_proto;
 
             //获取method id
-            //uint32_t methodId = (uint32_t)(pMethodDes->options().GetExtension(example::rpcProto::local_method_id));
             uint32_t methodId = (uint32_t)i;
 
             servicetmp.rpcService = service;

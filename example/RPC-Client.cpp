@@ -14,7 +14,7 @@ using namespace example::rpcProto;
 
 int main()
 {
-    PbRpcClient rpcClient("127.0.0.1", 8888, 4);
+    PbRpcClient rpcClient("127.0.0.1", 8888);
 
     RpcChannel channel(&rpcClient);
 

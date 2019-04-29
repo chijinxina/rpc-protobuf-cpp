@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include <folly/init/Init.h>
+#include <folly/hash/FarmHash.h>
 #include <folly/executors/CPUThreadPoolExecutor.h>
 #include <folly/executors/IOThreadPoolExecutor.h>
 
@@ -82,7 +83,6 @@ public:
     }
 };
 
-
 /*
  * RPC Client
  */
@@ -100,12 +100,17 @@ public:
             tcpClient.group(std::make_shared<folly::IOThreadPoolExecutor>(ioThreadNum));
         }
         //默认IOThreadPoolExecutor线程数为CPU核数
-
+        else
+        {
+            int cpuNum = std::thread::hardware_concurrency();
+            tcpClient.group(std::make_shared<folly::IOThreadPoolExecutor>(cpuNum));
+        }
 
         tcpClient.pipelineFactory(std::make_shared<RpcMsgPipelineFactory>());
 
         dispatcher = std::make_shared<MultiplexClientDispatcher>();
 
+        //与rpc远程服务器建立连接（非阻塞）
         connect();
     }
 
@@ -122,31 +127,25 @@ public:
 
     std::atomic_bool connected;        //是否成功与远程rpc服务器建立连接
 
-    std::shared_ptr<folly::CPUThreadPoolExecutor> threadPool;
-
 private:
+    /*异步连接远程rpc服务器*/
     void connect()
     {
-        std::cout<<remoteAddress<<std::endl;
-        pipeline = tcpClient.connect(remoteAddress).get();
-        std::cout<<"connected to the rpc server!"<<std::endl;
-        connected = true;
-        dispatcher->setPipeline(pipeline);
-//        tcpClient.connect(remoteAddress)
-//                .thenValue(
-//                        [this](RpcMsgClientSerializePipeline* p)
-//                        {
-//                            this->pipeline = p;
-//                            connected = true;
-//                            this->dispatcher->setPipeline(pipeline);
-//                            std::cout<<"connected to the rpc server!"<<std::endl;
-//                        })
-//                .thenError(folly::tag_t<std::exception>{},
-//                           [this](const std::exception& e)
-//                           {
-//                               std::cerr<<"[RpcClient] Connect error: "<< exceptionStr(e);
-//                               this->pipeline = nullptr;
-//                           });
+        tcpClient.connect(remoteAddress)
+                .thenValue(
+                        [this](RpcMsgClientSerializePipeline* p)
+                        {
+                            this->pipeline = p;
+                            connected = true;
+                            this->dispatcher->setPipeline(pipeline);
+                            std::cout<<"connected to the rpc server: "<<this->remoteAddress<<std::endl;
+                        })
+                .thenError(folly::tag_t<std::exception>{},
+                           [this](const std::exception& e)
+                           {
+                               std::cerr<<"[RpcClient] Connect error: "<< exceptionStr(e);
+                               this->pipeline = nullptr;
+                           });
     }
 
 };
@@ -176,7 +175,11 @@ public:
             rpcClient->connected = false;
         }
 
-        uint32_t serviceId = 1;
+        //获取service id 进行farmhash运算 将service name 转为 uint32
+        std::string serviceName = method->service()->full_name();
+        uint32_t serviceId = folly::hash::farmhash::Hash32(serviceName.c_str(), serviceName.length());
+        //std::cout<<"Called service name: "<<serviceName<<std::endl;
+        //std::cout<<" farmhash code = "<<serviceID<<std::endl;
 
         rpc::codec::RpcMessage Req;
         Req.set_type( rpc::codec::REQUEST );
@@ -194,7 +197,7 @@ public:
             rpc::codec::RpcMessage Res = (*(rpcClient->dispatcher))(Req).get();
             response->ParseFromString( Res.response() );
         }
-            /*设置异步回调*/
+        /*设置异步回调*/
         else
         {
             //cout<<"Req id = "<<Req.id()<<endl;
@@ -205,13 +208,12 @@ public:
                             //cout<<"Res id = "<<Res.id()<<endl;
                             response->ParseFromString( Res.response() );
                             done->Run();
-                            return Res;
+                        })
+                    .thenError(folly::tag_t<std::exception>{},
+                        [this, Req, response](const std::exception& e)
+                        {
+                            std::cerr<<"[RpcClient] call error: "<< exceptionStr(e);
                         });
-//                    .thenError(folly::tag_t<std::exception>{},
-//                        [](const std::exception& e)
-//                        {
-//                            std::cerr<<"[RpcCLient Error]"<<exceptionStr(e)<<std::endl;
-//                        });
         }
     }
 
