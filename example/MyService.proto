@@ -1,0 +1,56 @@
+syntax = "proto2";
+import "google/protobuf/descriptor.proto";
+
+option cc_generic_services = true;
+package example.rpcProto;
+
+
+extend google.protobuf.ServiceOptions
+{
+    optional uint32 global_service_id = 1000;
+}
+extend google.protobuf.MethodOptions
+{
+    optional uint32 local_method_id = 1000;
+}
+
+
+message EchoReq
+{
+    required string request = 1;
+}
+message EchoRes
+{
+    required string response = 1;
+}
+
+message OperaReq
+{
+    required int64 a = 1;
+    required int64 b = 2;
+}
+message OperaRes
+{
+    required int64 c = 1;
+}
+
+service MyService
+{
+    option (example.rpcProto.global_service_id) = 2302;
+
+    rpc Echo(EchoReq) returns(EchoRes)
+    {
+        option (example.rpcProto.local_method_id) = 1;
+    }
+
+    rpc Add(OperaReq) returns(OperaRes)
+    {
+        option (example.rpcProto.local_method_id) = 2;
+    }
+
+    rpc Sub(OperaReq) returns(OperaRes)
+    {
+        option (example.rpcProto.local_method_id) = 3;
+    }
+}
+

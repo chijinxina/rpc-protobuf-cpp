@@ -2,6 +2,7 @@ syntax = "proto2";
 
 package rpc.codec;
 
+
 enum MsgType
 {
     REQUEST = 1;
@@ -23,9 +24,9 @@ enum ErrorCode
 message RpcMessage
 {
     required MsgType type     = 1;     //消息类型
-    required int64 id         = 2;       //请求id requiest_id 类http2.0标准
-    required uint32 serviceId = 3;
-    required uint32 methodId  = 4;
+    required int64 id         = 2;     //请求id requiest_id 类http2.0
+    required uint32 serviceId = 3;     //服务ID
+    required uint32 methodId  = 4;     //方法ID
 
     optional bytes request    = 5;     //请求 protocol二进制编码
     optional bytes response   = 6;     //响应 protocol二进制编码

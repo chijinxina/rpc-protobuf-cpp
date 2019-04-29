@@ -14,9 +14,17 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR}/bin)
 
 ################# folly #############
-find_package(Folly REQUIRED)
-message("find Folly include: ${FOLLY_INCLUDE_DIR}")
-message("find Folly libraries: ${FOLLY_LIBRARIES}")
+find_package(folly CONFIG)
+if (NOT folly_FOUND)
+    # Look for folly using our FindFolly.cmake module.  This may work if the
+    # folly was built with its older autoconf build files rather than with CMake.
+    find_package(Folly MODULE REQUIRED)
+endif()
+
+################# fizz #############
+find_package(fizz CONFIG REQUIRED)
+message("find fizz include: ${FIZZ_INCLUDE_DIR}")
+message("find fizz libraries: ${FIZZ_LIBRARIES}")
 
 ################# wangle #############
 find_package(wangle REQUIRED)
@@ -35,13 +43,29 @@ include_directories(
         ${WANGLE_INCLUDE_DIR}
 )
 
-add_library(pbrpc
-        net/PbRpcServer/PbRpcServer.cpp
-        net/PbRpcClient/PbRpcClient.cpp
+#add_library(pbrpc
+#        net/PbRpcServer/PbRpcServer.cpp
+#        net/PbRpcClient/PbRpcClient.cpp
+#)
+
+add_executable(RpcServerTest
+        protobufCoder/RpcMessage.pb.cc
+        example/MyService.pb.cc
+        example/RPC-Server.cpp
 )
 
-target_link_libraries(pbrpc
-        ${FOLLY_LIBRARIES}
+target_link_libraries(RpcServerTest
         ${WANGLE_LIBRARIES}
         ${PROTOBUF_LIBRARIES}
 )
+
+add_executable(RpcClientTest
+        protobufCoder/RpcMessage.pb.cc
+        example/MyService.pb.cc
+        example/RPC-Client.cpp
+        )
+
+target_link_libraries(RpcClientTest
+        ${WANGLE_LIBRARIES}
+        ${PROTOBUF_LIBRARIES}
+        )

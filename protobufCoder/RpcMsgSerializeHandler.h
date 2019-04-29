@@ -5,6 +5,9 @@
 #ifndef WANGLE_RPCMSGSERIALIZEHANDLER_H
 #define WANGLE_RPCMSGSERIALIZEHANDLER_H
 
+#include <wangle/channel/Handler.h>
+#include "protobufCoder/RpcMessage.pb.h"
+
 /*
  * RPC Message SerializeHandler
  *    message RpcMessage
@@ -26,15 +29,22 @@ public:
     //从IObuf中读取数据 到  RpcMessage中 利用protobuf进行反序列化 得到 rpc::codec::RpcMessage
     void read(Context* ctx, std::unique_ptr<folly::IOBuf> msg) override
     {
-        rpc::codec::RpcMessage in;
+//        try
+//        {
+            rpc::codec::RpcMessage in;
+            in.ParseFromArray((void*)msg->data(), msg->length());
 
-        in.ParseFromArray((void*)msg->data(), msg->length());
-
-//        printf("[ServerSerializeHandler] READ: \n");
-//        printf("------- in id       = %d \n",in.id());
-//        printf("------- in request  = %s \n",in.request().c_str());
-//        printf("------- in response = %s \n",in.response().c_str());
-        ctx->fireRead(std::move(in));
+            //        printf("[ServerSerializeHandler] READ: \n");
+            //        printf("------- in id       = %d \n",in.id());
+            //        printf("------- in request  = %s \n",in.request().c_str());
+            //        printf("------- in response = %s \n",in.response().c_str());
+            ctx->fireRead(std::move(in));
+//        }
+//        catch(const std::exception& e)
+//        {
+//            std::cerr<<"[RpcMsgSerializeHandler] READ EXCEPTION"<<std::endl;
+//           // ctx->fireReadException(exp);
+//        }
     }
 
     //从RpcMessage中写数据 到 IOBuf中 利用protobuf进行序列化 得到二进制的RpcMessage
@@ -50,7 +60,6 @@ public:
 
         return ctx->fireWrite(folly::IOBuf::copyBuffer(outstr));
     }
-
 
 
     //读取到EOF 说明对端关闭了连接
