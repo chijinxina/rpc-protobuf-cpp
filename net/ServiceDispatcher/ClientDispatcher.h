@@ -46,6 +46,7 @@ public:
         {
             return;
         }
+
         ReqPromisePtr p = search->second;
         requests_.erase(search);
         p->setValue(in);
@@ -77,7 +78,7 @@ public:
                 [arg, this](const folly::exception_wrapper&)
                 {
                     std::cerr << "[Rpc Called Error Interrupt]" <<std::endl;
-                    this->requests_.erase((int64_t)arg.id());
+                    this->requests_.erase( (int64_t)arg.id() );
                 });
 
         this->pipeline_->write(arg);

@@ -27,61 +27,22 @@ class RpcMsgSerializeHandler
 {
 public:
     //从IObuf中读取数据 到  RpcMessage中 利用protobuf进行反序列化 得到 rpc::codec::RpcMessage
-    void read(Context* ctx, std::unique_ptr<folly::IOBuf> msg) override
-    {
-//        try
-//        {
-            rpc::codec::RpcMessage in;
-            in.ParseFromArray((void*)msg->data(), msg->length());
+    void read(Context *ctx, std::unique_ptr<folly::IOBuf> msg) override;
 
-            //        printf("[ServerSerializeHandler] READ: \n");
-            //        printf("------- in id       = %d \n",in.id());
-            //        printf("------- in request  = %s \n",in.request().c_str());
-            //        printf("------- in response = %s \n",in.response().c_str());
-            ctx->fireRead(std::move(in));
-//        }
-//        catch(const std::exception& e)
-//        {
-//            std::cerr<<"[RpcMsgSerializeHandler] READ EXCEPTION"<<std::endl;
-//           // ctx->fireReadException(exp);
-//        }
-    }
+    //对端关闭连接
+    void readEOF(Context *ctx) override;
+
+    //读取数据发生异常
+    void readException(Context *ctx, folly::exception_wrapper e) override;
 
     //从RpcMessage中写数据 到 IOBuf中 利用protobuf进行序列化 得到二进制的RpcMessage
-    folly::Future<folly::Unit> write(Context* ctx, rpc::codec::RpcMessage out) override
-    {
-        std::string outstr;
-
-        //将RpcMesage序列化写入到string中
-        out.SerializePartialToString(&outstr);
-
-        //      std::cout<<"[ServerSerializeHandler WRITE]:"<<std::endl;
-        //      std::cout<<outstr<<std::endl;
-
-        return ctx->fireWrite(folly::IOBuf::copyBuffer(outstr));
-    }
-
-
-    //读取到EOF 说明对端关闭了连接
-    void readEOF(Context *ctx) override
-    {
-        std::cout<<"[ServerSerializeHandler] -- read EOF"<<std::endl;
-        Handler::readEOF(ctx);
-    }
-
-    //读取数据出现异常
-    void readException(Context *ctx, folly::exception_wrapper e) override
-    {
-        std::cout<<"[ServerSerializeHandler] -- read Exception:"<<exceptionStr(e)<<std::endl;
-        Handler::readException(ctx, e);
-    }
+    folly::Future<folly::Unit> write(Context *ctx, rpc::codec::RpcMessage msg) override;
 
     //写入数据出现异常
-    folly::Future<folly::Unit> writeException(Context *ctx, folly::exception_wrapper e) override
-    {
-        std::cout<<"[ServerSerializeHandler] -- write Exception:"<<exceptionStr(e)<<std::endl;
-        return Handler::writeException(ctx, e);
-    }
+    folly::Future<folly::Unit> writeException(Context *ctx, folly::exception_wrapper e) override;
+
+    //关闭pipeline
+    folly::Future<folly::Unit> close(Context *ctx) override;
 };
 
 

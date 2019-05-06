@@ -43,29 +43,41 @@ include_directories(
         ${WANGLE_INCLUDE_DIR}
 )
 
-#add_library(pbrpc
-#        net/PbRpcServer/PbRpcServer.cpp
-#        net/PbRpcClient/PbRpcClient.cpp
-#)
 
-add_executable(RpcServerTest
+add_subdirectory(example)
+
+add_library(pbrpc
+        codec/LengthFieldPrepender.cpp
+        codec/LengthFieldBasedFrameDecoder.cpp
         protobufCoder/RpcMessage.pb.cc
-        example/MyService.pb.cc
-        example/RPC-Server.cpp
-)
-
-target_link_libraries(RpcServerTest
-        ${WANGLE_LIBRARIES}
-        ${PROTOBUF_LIBRARIES}
-)
-
-add_executable(RpcClientTest
-        protobufCoder/RpcMessage.pb.cc
-        example/MyService.pb.cc
-        example/RPC-Client.cpp
+        protobufCoder/RpcMsgSerializeHandler.cc
+        net/PbRpcClient.cc
+        net/PbRpcServer.cc
+        net/futureRpcClient.cc
         )
-
-target_link_libraries(RpcClientTest
+target_link_libraries(pbrpc
         ${WANGLE_LIBRARIES}
         ${PROTOBUF_LIBRARIES}
         )
+
+
+################ make install ##################
+INSTALL(
+        TARGETS pbrpc
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION libstatic
+)
+INSTALL(
+        FILES
+        protobufCoder/RpcMessage.pb.h
+        protobufCoder/RpcMsgSerializeHandler.h
+        net/ServiceDispatcher/ServerDispatcher.h
+        net/ServiceDispatcher/ClientDispatcher.h
+        net/PbRpcClient.h
+        net/PbRpcServer.h
+        codec/LengthFieldPrepender.h
+        codec/LengthFieldBasedFrameDecoder.h
+
+        DESTINATION include
+)
