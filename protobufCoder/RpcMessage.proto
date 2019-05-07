@@ -24,7 +24,7 @@ enum ErrorCode
 message RpcMessage
 {
     required MsgType type     = 1;     //消息类型
-    required int64 id         = 2;     //请求id requiest_id 类http2.0
+    required int64 id         = 2;     //请求id requiest_id 类http2.0的无序请求-响应
     required uint32 serviceId = 3;     //服务ID
     required uint32 methodId  = 4;     //方法ID
 
