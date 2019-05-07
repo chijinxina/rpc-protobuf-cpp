@@ -165,12 +165,12 @@ void RpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method, go
         /*设置异步回调*/
     else
     {
-        std::cout<<"Req id = "<<Req.id()<<std::endl;
+        //std::cout<<"Req id = "<<Req.id()<<std::endl;
         (*(rpcClient->dispatcher))(Req)
                 .thenValue(
                         [Req, response, done](rpc::codec::RpcMessage Res)
                         {
-                            std::cout<<"Res id = "<<Res.id()<<std::endl;
+                            //std::cout<<"Res id = "<<Res.id()<<std::endl;
                             response->ParseFromString( Res.response() );
                             done->Run();
                         })

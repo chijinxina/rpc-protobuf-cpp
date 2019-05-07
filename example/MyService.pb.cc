@@ -34,6 +34,14 @@ class OperaResDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<OperaRes> _instance;
 } _OperaRes_default_instance_;
+class OperaReqFDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<OperaReqF> _instance;
+} _OperaReqF_default_instance_;
+class OperaResFDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<OperaResF> _instance;
+} _OperaResF_default_instance_;
 }  // namespace rpcProto
 }  // namespace example
 static void InitDefaultsEchoReq_MyService_2eproto() {
@@ -92,16 +100,46 @@ static void InitDefaultsOperaRes_MyService_2eproto() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_OperaRes_MyService_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsOperaRes_MyService_2eproto}, {}};
 
+static void InitDefaultsOperaReqF_MyService_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::example::rpcProto::_OperaReqF_default_instance_;
+    new (ptr) ::example::rpcProto::OperaReqF();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::example::rpcProto::OperaReqF::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_OperaReqF_MyService_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsOperaReqF_MyService_2eproto}, {}};
+
+static void InitDefaultsOperaResF_MyService_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::example::rpcProto::_OperaResF_default_instance_;
+    new (ptr) ::example::rpcProto::OperaResF();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::example::rpcProto::OperaResF::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_OperaResF_MyService_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsOperaResF_MyService_2eproto}, {}};
+
 void InitDefaults_MyService_2eproto() {
   ::google::protobuf::internal::InitSCC(&scc_info_EchoReq_MyService_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_EchoRes_MyService_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_OperaReq_MyService_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_OperaRes_MyService_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_OperaReqF_MyService_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_OperaResF_MyService_2eproto.base);
 }
 
-::google::protobuf::Metadata file_level_metadata_MyService_2eproto[4];
+::google::protobuf::Metadata file_level_metadata_MyService_2eproto[6];
 constexpr ::google::protobuf::EnumDescriptor const** file_level_enum_descriptors_MyService_2eproto = nullptr;
-const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors_MyService_2eproto[1];
+const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors_MyService_2eproto[2];
 
 const ::google::protobuf::uint32 TableStruct_MyService_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   PROTOBUF_FIELD_OFFSET(::example::rpcProto::EchoReq, _has_bits_),
@@ -134,12 +172,30 @@ const ::google::protobuf::uint32 TableStruct_MyService_2eproto::offsets[] PROTOB
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaRes, c_),
   0,
+  PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaReqF, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaReqF, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaReqF, a_),
+  PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaReqF, b_),
+  0,
+  1,
+  PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaResF, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaResF, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::example::rpcProto::OperaResF, c_),
+  0,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 6, sizeof(::example::rpcProto::EchoReq)},
   { 7, 13, sizeof(::example::rpcProto::EchoRes)},
   { 14, 21, sizeof(::example::rpcProto::OperaReq)},
   { 23, 29, sizeof(::example::rpcProto::OperaRes)},
+  { 30, 37, sizeof(::example::rpcProto::OperaReqF)},
+  { 39, 45, sizeof(::example::rpcProto::OperaResF)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -147,42 +203,43 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::example::rpcProto::_EchoRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::example::rpcProto::_OperaReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::example::rpcProto::_OperaRes_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::example::rpcProto::_OperaReqF_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::example::rpcProto::_OperaResF_default_instance_),
 };
 
 ::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_MyService_2eproto = {
   {}, AddDescriptors_MyService_2eproto, "MyService.proto", schemas,
   file_default_instances, TableStruct_MyService_2eproto::offsets,
-  file_level_metadata_MyService_2eproto, 4, file_level_enum_descriptors_MyService_2eproto, file_level_service_descriptors_MyService_2eproto,
+  file_level_metadata_MyService_2eproto, 6, file_level_enum_descriptors_MyService_2eproto, file_level_service_descriptors_MyService_2eproto,
 };
 
 const char descriptor_table_protodef_MyService_2eproto[] =
-  "\n\017MyService.proto\022\020example.rpcProto\032 goo"
-  "gle/protobuf/descriptor.proto\"\032\n\007EchoReq"
-  "\022\017\n\007request\030\001 \002(\t\"\033\n\007EchoRes\022\020\n\010response"
-  "\030\001 \002(\t\" \n\010OperaReq\022\t\n\001a\030\001 \002(\003\022\t\n\001b\030\002 \002(\003"
-  "\"\025\n\010OperaRes\022\t\n\001c\030\001 \002(\0032\334\001\n\tMyService\022A\n"
-  "\004Echo\022\031.example.rpcProto.EchoReq\032\031.examp"
-  "le.rpcProto.EchoRes\"\003\300>\001\022B\n\003Add\022\032.exampl"
-  "e.rpcProto.OperaReq\032\032.example.rpcProto.O"
-  "peraRes\"\003\300>\002\022B\n\003Sub\022\032.example.rpcProto.O"
-  "peraReq\032\032.example.rpcProto.OperaRes\"\003\300>\003"
-  "\032\004\300>\376\021:;\n\021global_service_id\022\037.google.pro"
-  "tobuf.ServiceOptions\030\350\007 \001(\r:8\n\017local_met"
-  "hod_id\022\036.google.protobuf.MethodOptions\030\350"
-  "\007 \001(\rB\003\200\001\001"
+  "\n\017MyService.proto\022\020example.rpcProto\"\032\n\007E"
+  "choReq\022\017\n\007request\030\001 \002(\t\"\033\n\007EchoRes\022\020\n\010re"
+  "sponse\030\001 \002(\t\" \n\010OperaReq\022\t\n\001a\030\001 \002(\003\022\t\n\001b"
+  "\030\002 \002(\003\"\025\n\010OperaRes\022\t\n\001c\030\001 \002(\003\"!\n\tOperaRe"
+  "qF\022\t\n\001a\030\001 \002(\002\022\t\n\001b\030\002 \002(\002\"\026\n\tOperaResF\022\t\n"
+  "\001c\030\001 \002(\0022\307\001\n\tMyService\022<\n\004Echo\022\031.example"
+  ".rpcProto.EchoReq\032\031.example.rpcProto.Ech"
+  "oRes\022=\n\003Add\022\032.example.rpcProto.OperaReq\032"
+  "\032.example.rpcProto.OperaRes\022=\n\003Sub\022\032.exa"
+  "mple.rpcProto.OperaReq\032\032.example.rpcProt"
+  "o.OperaRes2\214\001\n\010Service2\022\?\n\003Mul\022\033.example"
+  ".rpcProto.OperaReqF\032\033.example.rpcProto.O"
+  "peraResF\022\?\n\003Div\022\033.example.rpcProto.Opera"
+  "ReqF\032\033.example.rpcProto.OperaResFB\003\200\001\001"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_MyService_2eproto = {
   false, InitDefaults_MyService_2eproto, 
   descriptor_table_protodef_MyService_2eproto,
-  "MyService.proto", &assign_descriptors_table_MyService_2eproto, 530,
+  "MyService.proto", &assign_descriptors_table_MyService_2eproto, 558,
 };
 
 void AddDescriptors_MyService_2eproto() {
   static constexpr ::google::protobuf::internal::InitFunc deps[1] =
   {
-    ::AddDescriptors_google_2fprotobuf_2fdescriptor_2eproto,
   };
- ::google::protobuf::internal::AddDescriptors(&descriptor_table_MyService_2eproto, deps, 1);
+ ::google::protobuf::internal::AddDescriptors(&descriptor_table_MyService_2eproto, deps, 0);
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1423,6 +1480,611 @@ void OperaRes::InternalSwap(OperaRes* other) {
 
 // ===================================================================
 
+void OperaReqF::InitAsDefaultInstance() {
+}
+class OperaReqF::HasBitSetters {
+ public:
+  static void set_has_a(OperaReqF* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+  static void set_has_b(OperaReqF* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int OperaReqF::kAFieldNumber;
+const int OperaReqF::kBFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+OperaReqF::OperaReqF()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:example.rpcProto.OperaReqF)
+}
+OperaReqF::OperaReqF(const OperaReqF& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&a_, &from.a_,
+    static_cast<size_t>(reinterpret_cast<char*>(&b_) -
+    reinterpret_cast<char*>(&a_)) + sizeof(b_));
+  // @@protoc_insertion_point(copy_constructor:example.rpcProto.OperaReqF)
+}
+
+void OperaReqF::SharedCtor() {
+  ::memset(&a_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&b_) -
+      reinterpret_cast<char*>(&a_)) + sizeof(b_));
+}
+
+OperaReqF::~OperaReqF() {
+  // @@protoc_insertion_point(destructor:example.rpcProto.OperaReqF)
+  SharedDtor();
+}
+
+void OperaReqF::SharedDtor() {
+}
+
+void OperaReqF::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const OperaReqF& OperaReqF::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_OperaReqF_MyService_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void OperaReqF::Clear() {
+// @@protoc_insertion_point(message_clear_start:example.rpcProto.OperaReqF)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    ::memset(&a_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&b_) -
+        reinterpret_cast<char*>(&a_)) + sizeof(b_));
+  }
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* OperaReqF::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<OperaReqF*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // required float a = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 13) goto handle_unusual;
+        msg->set_a(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      // required float b = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 21) goto handle_unusual;
+        msg->set_b(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool OperaReqF::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:example.rpcProto.OperaReqF)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required float a = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (13 & 0xFF)) {
+          HasBitSetters::set_has_a(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &a_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required float b = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (21 & 0xFF)) {
+          HasBitSetters::set_has_b(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &b_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:example.rpcProto.OperaReqF)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:example.rpcProto.OperaReqF)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void OperaReqF::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:example.rpcProto.OperaReqF)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required float a = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->a(), output);
+  }
+
+  // required float b = 2;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->b(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:example.rpcProto.OperaReqF)
+}
+
+::google::protobuf::uint8* OperaReqF::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:example.rpcProto.OperaReqF)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required float a = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->a(), target);
+  }
+
+  // required float b = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->b(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:example.rpcProto.OperaReqF)
+  return target;
+}
+
+size_t OperaReqF::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:example.rpcProto.OperaReqF)
+  size_t total_size = 0;
+
+  if (has_a()) {
+    // required float a = 1;
+    total_size += 1 + 4;
+  }
+
+  if (has_b()) {
+    // required float b = 2;
+    total_size += 1 + 4;
+  }
+
+  return total_size;
+}
+size_t OperaReqF::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:example.rpcProto.OperaReqF)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required float a = 1;
+    total_size += 1 + 4;
+
+    // required float b = 2;
+    total_size += 1 + 4;
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void OperaReqF::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:example.rpcProto.OperaReqF)
+  GOOGLE_DCHECK_NE(&from, this);
+  const OperaReqF* source =
+      ::google::protobuf::DynamicCastToGenerated<OperaReqF>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:example.rpcProto.OperaReqF)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:example.rpcProto.OperaReqF)
+    MergeFrom(*source);
+  }
+}
+
+void OperaReqF::MergeFrom(const OperaReqF& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:example.rpcProto.OperaReqF)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      a_ = from.a_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      b_ = from.b_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void OperaReqF::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:example.rpcProto.OperaReqF)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void OperaReqF::CopyFrom(const OperaReqF& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:example.rpcProto.OperaReqF)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool OperaReqF::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  return true;
+}
+
+void OperaReqF::Swap(OperaReqF* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void OperaReqF::InternalSwap(OperaReqF* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(a_, other->a_);
+  swap(b_, other->b_);
+}
+
+::google::protobuf::Metadata OperaReqF::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_MyService_2eproto);
+  return ::file_level_metadata_MyService_2eproto[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void OperaResF::InitAsDefaultInstance() {
+}
+class OperaResF::HasBitSetters {
+ public:
+  static void set_has_c(OperaResF* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int OperaResF::kCFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+OperaResF::OperaResF()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:example.rpcProto.OperaResF)
+}
+OperaResF::OperaResF(const OperaResF& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  c_ = from.c_;
+  // @@protoc_insertion_point(copy_constructor:example.rpcProto.OperaResF)
+}
+
+void OperaResF::SharedCtor() {
+  c_ = 0;
+}
+
+OperaResF::~OperaResF() {
+  // @@protoc_insertion_point(destructor:example.rpcProto.OperaResF)
+  SharedDtor();
+}
+
+void OperaResF::SharedDtor() {
+}
+
+void OperaResF::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const OperaResF& OperaResF::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_OperaResF_MyService_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void OperaResF::Clear() {
+// @@protoc_insertion_point(message_clear_start:example.rpcProto.OperaResF)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  c_ = 0;
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* OperaResF::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<OperaResF*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // required float c = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 13) goto handle_unusual;
+        msg->set_c(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool OperaResF::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:example.rpcProto.OperaResF)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required float c = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (13 & 0xFF)) {
+          HasBitSetters::set_has_c(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &c_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:example.rpcProto.OperaResF)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:example.rpcProto.OperaResF)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void OperaResF::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:example.rpcProto.OperaResF)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required float c = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->c(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:example.rpcProto.OperaResF)
+}
+
+::google::protobuf::uint8* OperaResF::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:example.rpcProto.OperaResF)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required float c = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->c(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:example.rpcProto.OperaResF)
+  return target;
+}
+
+size_t OperaResF::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:example.rpcProto.OperaResF)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  // required float c = 1;
+  if (has_c()) {
+    total_size += 1 + 4;
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void OperaResF::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:example.rpcProto.OperaResF)
+  GOOGLE_DCHECK_NE(&from, this);
+  const OperaResF* source =
+      ::google::protobuf::DynamicCastToGenerated<OperaResF>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:example.rpcProto.OperaResF)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:example.rpcProto.OperaResF)
+    MergeFrom(*source);
+  }
+}
+
+void OperaResF::MergeFrom(const OperaResF& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:example.rpcProto.OperaResF)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_c()) {
+    set_c(from.c());
+  }
+}
+
+void OperaResF::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:example.rpcProto.OperaResF)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void OperaResF::CopyFrom(const OperaResF& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:example.rpcProto.OperaResF)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool OperaResF::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  return true;
+}
+
+void OperaResF::Swap(OperaResF* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void OperaResF::InternalSwap(OperaResF* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(c_, other->c_);
+}
+
+::google::protobuf::Metadata OperaResF::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_MyService_2eproto);
+  return ::file_level_metadata_MyService_2eproto[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 MyService::~MyService() {}
 
 const ::google::protobuf::ServiceDescriptor* MyService::descriptor() {
@@ -1555,12 +2217,115 @@ void MyService_Stub::Sub(::google::protobuf::RpcController* controller,
   channel_->CallMethod(descriptor()->method(2),
                        controller, request, response, done);
 }
-::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::ServiceOptions,
-    ::google::protobuf::internal::PrimitiveTypeTraits< ::google::protobuf::uint32 >, 13, false >
-  global_service_id(kGlobalServiceIdFieldNumber, 0u);
-::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MethodOptions,
-    ::google::protobuf::internal::PrimitiveTypeTraits< ::google::protobuf::uint32 >, 13, false >
-  local_method_id(kLocalMethodIdFieldNumber, 0u);
+// ===================================================================
+
+Service2::~Service2() {}
+
+const ::google::protobuf::ServiceDescriptor* Service2::descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_MyService_2eproto);
+  return file_level_service_descriptors_MyService_2eproto[1];
+}
+
+const ::google::protobuf::ServiceDescriptor* Service2::GetDescriptor() {
+  return descriptor();
+}
+
+void Service2::Mul(::google::protobuf::RpcController* controller,
+                         const ::example::rpcProto::OperaReqF*,
+                         ::example::rpcProto::OperaResF*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method Mul() not implemented.");
+  done->Run();
+}
+
+void Service2::Div(::google::protobuf::RpcController* controller,
+                         const ::example::rpcProto::OperaReqF*,
+                         ::example::rpcProto::OperaResF*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method Div() not implemented.");
+  done->Run();
+}
+
+void Service2::CallMethod(const ::google::protobuf::MethodDescriptor* method,
+                             ::google::protobuf::RpcController* controller,
+                             const ::google::protobuf::Message* request,
+                             ::google::protobuf::Message* response,
+                             ::google::protobuf::Closure* done) {
+  GOOGLE_DCHECK_EQ(method->service(), file_level_service_descriptors_MyService_2eproto[1]);
+  switch(method->index()) {
+    case 0:
+      Mul(controller,
+             ::google::protobuf::down_cast<const ::example::rpcProto::OperaReqF*>(request),
+             ::google::protobuf::down_cast< ::example::rpcProto::OperaResF*>(response),
+             done);
+      break;
+    case 1:
+      Div(controller,
+             ::google::protobuf::down_cast<const ::example::rpcProto::OperaReqF*>(request),
+             ::google::protobuf::down_cast< ::example::rpcProto::OperaResF*>(response),
+             done);
+      break;
+    default:
+      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
+      break;
+  }
+}
+
+const ::google::protobuf::Message& Service2::GetRequestPrototype(
+    const ::google::protobuf::MethodDescriptor* method) const {
+  GOOGLE_DCHECK_EQ(method->service(), descriptor());
+  switch(method->index()) {
+    case 0:
+      return ::example::rpcProto::OperaReqF::default_instance();
+    case 1:
+      return ::example::rpcProto::OperaReqF::default_instance();
+    default:
+      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
+      return *::google::protobuf::MessageFactory::generated_factory()
+          ->GetPrototype(method->input_type());
+  }
+}
+
+const ::google::protobuf::Message& Service2::GetResponsePrototype(
+    const ::google::protobuf::MethodDescriptor* method) const {
+  GOOGLE_DCHECK_EQ(method->service(), descriptor());
+  switch(method->index()) {
+    case 0:
+      return ::example::rpcProto::OperaResF::default_instance();
+    case 1:
+      return ::example::rpcProto::OperaResF::default_instance();
+    default:
+      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
+      return *::google::protobuf::MessageFactory::generated_factory()
+          ->GetPrototype(method->output_type());
+  }
+}
+
+Service2_Stub::Service2_Stub(::google::protobuf::RpcChannel* channel)
+  : channel_(channel), owns_channel_(false) {}
+Service2_Stub::Service2_Stub(
+    ::google::protobuf::RpcChannel* channel,
+    ::google::protobuf::Service::ChannelOwnership ownership)
+  : channel_(channel),
+    owns_channel_(ownership == ::google::protobuf::Service::STUB_OWNS_CHANNEL) {}
+Service2_Stub::~Service2_Stub() {
+  if (owns_channel_) delete channel_;
+}
+
+void Service2_Stub::Mul(::google::protobuf::RpcController* controller,
+                              const ::example::rpcProto::OperaReqF* request,
+                              ::example::rpcProto::OperaResF* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(0),
+                       controller, request, response, done);
+}
+void Service2_Stub::Div(::google::protobuf::RpcController* controller,
+                              const ::example::rpcProto::OperaReqF* request,
+                              ::example::rpcProto::OperaResF* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(1),
+                       controller, request, response, done);
+}
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace rpcProto
@@ -1578,6 +2343,12 @@ template<> PROTOBUF_NOINLINE ::example::rpcProto::OperaReq* Arena::CreateMaybeMe
 }
 template<> PROTOBUF_NOINLINE ::example::rpcProto::OperaRes* Arena::CreateMaybeMessage< ::example::rpcProto::OperaRes >(Arena* arena) {
   return Arena::CreateInternal< ::example::rpcProto::OperaRes >(arena);
+}
+template<> PROTOBUF_NOINLINE ::example::rpcProto::OperaReqF* Arena::CreateMaybeMessage< ::example::rpcProto::OperaReqF >(Arena* arena) {
+  return Arena::CreateInternal< ::example::rpcProto::OperaReqF >(arena);
+}
+template<> PROTOBUF_NOINLINE ::example::rpcProto::OperaResF* Arena::CreateMaybeMessage< ::example::rpcProto::OperaResF >(Arena* arena) {
+  return Arena::CreateInternal< ::example::rpcProto::OperaResF >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

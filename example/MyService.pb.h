@@ -32,7 +32,6 @@
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/service.h>
 #include <google/protobuf/unknown_field_set.h>
-#include <google/protobuf/descriptor.pb.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_MyService_2eproto
@@ -43,7 +42,7 @@ struct TableStruct_MyService_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[4]
+  static const ::google::protobuf::internal::ParseTable schema[6]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -61,9 +60,15 @@ extern EchoResDefaultTypeInternal _EchoRes_default_instance_;
 class OperaReq;
 class OperaReqDefaultTypeInternal;
 extern OperaReqDefaultTypeInternal _OperaReq_default_instance_;
+class OperaReqF;
+class OperaReqFDefaultTypeInternal;
+extern OperaReqFDefaultTypeInternal _OperaReqF_default_instance_;
 class OperaRes;
 class OperaResDefaultTypeInternal;
 extern OperaResDefaultTypeInternal _OperaRes_default_instance_;
+class OperaResF;
+class OperaResFDefaultTypeInternal;
+extern OperaResFDefaultTypeInternal _OperaResF_default_instance_;
 }  // namespace rpcProto
 }  // namespace example
 namespace google {
@@ -71,7 +76,9 @@ namespace protobuf {
 template<> ::example::rpcProto::EchoReq* Arena::CreateMaybeMessage<::example::rpcProto::EchoReq>(Arena*);
 template<> ::example::rpcProto::EchoRes* Arena::CreateMaybeMessage<::example::rpcProto::EchoRes>(Arena*);
 template<> ::example::rpcProto::OperaReq* Arena::CreateMaybeMessage<::example::rpcProto::OperaReq>(Arena*);
+template<> ::example::rpcProto::OperaReqF* Arena::CreateMaybeMessage<::example::rpcProto::OperaReqF>(Arena*);
 template<> ::example::rpcProto::OperaRes* Arena::CreateMaybeMessage<::example::rpcProto::OperaRes>(Arena*);
+template<> ::example::rpcProto::OperaResF* Arena::CreateMaybeMessage<::example::rpcProto::OperaResF>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace example {
@@ -588,6 +595,259 @@ class OperaRes :
   ::google::protobuf::int64 c_;
   friend struct ::TableStruct_MyService_2eproto;
 };
+// -------------------------------------------------------------------
+
+class OperaReqF :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:example.rpcProto.OperaReqF) */ {
+ public:
+  OperaReqF();
+  virtual ~OperaReqF();
+
+  OperaReqF(const OperaReqF& from);
+
+  inline OperaReqF& operator=(const OperaReqF& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  OperaReqF(OperaReqF&& from) noexcept
+    : OperaReqF() {
+    *this = ::std::move(from);
+  }
+
+  inline OperaReqF& operator=(OperaReqF&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const OperaReqF& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const OperaReqF* internal_default_instance() {
+    return reinterpret_cast<const OperaReqF*>(
+               &_OperaReqF_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  void Swap(OperaReqF* other);
+  friend void swap(OperaReqF& a, OperaReqF& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline OperaReqF* New() const final {
+    return CreateMaybeMessage<OperaReqF>(nullptr);
+  }
+
+  OperaReqF* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<OperaReqF>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const OperaReqF& from);
+  void MergeFrom(const OperaReqF& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(OperaReqF* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float a = 1;
+  bool has_a() const;
+  void clear_a();
+  static const int kAFieldNumber = 1;
+  float a() const;
+  void set_a(float value);
+
+  // required float b = 2;
+  bool has_b() const;
+  void clear_b();
+  static const int kBFieldNumber = 2;
+  float b() const;
+  void set_b(float value);
+
+  // @@protoc_insertion_point(class_scope:example.rpcProto.OperaReqF)
+ private:
+  class HasBitSetters;
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  float a_;
+  float b_;
+  friend struct ::TableStruct_MyService_2eproto;
+};
+// -------------------------------------------------------------------
+
+class OperaResF :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:example.rpcProto.OperaResF) */ {
+ public:
+  OperaResF();
+  virtual ~OperaResF();
+
+  OperaResF(const OperaResF& from);
+
+  inline OperaResF& operator=(const OperaResF& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  OperaResF(OperaResF&& from) noexcept
+    : OperaResF() {
+    *this = ::std::move(from);
+  }
+
+  inline OperaResF& operator=(OperaResF&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const OperaResF& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const OperaResF* internal_default_instance() {
+    return reinterpret_cast<const OperaResF*>(
+               &_OperaResF_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  void Swap(OperaResF* other);
+  friend void swap(OperaResF& a, OperaResF& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline OperaResF* New() const final {
+    return CreateMaybeMessage<OperaResF>(nullptr);
+  }
+
+  OperaResF* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<OperaResF>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const OperaResF& from);
+  void MergeFrom(const OperaResF& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(OperaResF* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float c = 1;
+  bool has_c() const;
+  void clear_c();
+  static const int kCFieldNumber = 1;
+  float c() const;
+  void set_c(float value);
+
+  // @@protoc_insertion_point(class_scope:example.rpcProto.OperaResF)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  float c_;
+  friend struct ::TableStruct_MyService_2eproto;
+};
 // ===================================================================
 
 class MyService_Stub;
@@ -663,16 +923,75 @@ class MyService_Stub : public MyService {
 };
 
 
+// -------------------------------------------------------------------
+
+class Service2_Stub;
+
+class Service2 : public ::google::protobuf::Service {
+ protected:
+  // This class should be treated as an abstract interface.
+  inline Service2() {};
+ public:
+  virtual ~Service2();
+
+  typedef Service2_Stub Stub;
+
+  static const ::google::protobuf::ServiceDescriptor* descriptor();
+
+  virtual void Mul(::google::protobuf::RpcController* controller,
+                       const ::example::rpcProto::OperaReqF* request,
+                       ::example::rpcProto::OperaResF* response,
+                       ::google::protobuf::Closure* done);
+  virtual void Div(::google::protobuf::RpcController* controller,
+                       const ::example::rpcProto::OperaReqF* request,
+                       ::example::rpcProto::OperaResF* response,
+                       ::google::protobuf::Closure* done);
+
+  // implements Service ----------------------------------------------
+
+  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
+  void CallMethod(const ::google::protobuf::MethodDescriptor* method,
+                  ::google::protobuf::RpcController* controller,
+                  const ::google::protobuf::Message* request,
+                  ::google::protobuf::Message* response,
+                  ::google::protobuf::Closure* done);
+  const ::google::protobuf::Message& GetRequestPrototype(
+    const ::google::protobuf::MethodDescriptor* method) const;
+  const ::google::protobuf::Message& GetResponsePrototype(
+    const ::google::protobuf::MethodDescriptor* method) const;
+
+ private:
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Service2);
+};
+
+class Service2_Stub : public Service2 {
+ public:
+  Service2_Stub(::google::protobuf::RpcChannel* channel);
+  Service2_Stub(::google::protobuf::RpcChannel* channel,
+                   ::google::protobuf::Service::ChannelOwnership ownership);
+  ~Service2_Stub();
+
+  inline ::google::protobuf::RpcChannel* channel() { return channel_; }
+
+  // implements Service2 ------------------------------------------
+
+  void Mul(::google::protobuf::RpcController* controller,
+                       const ::example::rpcProto::OperaReqF* request,
+                       ::example::rpcProto::OperaResF* response,
+                       ::google::protobuf::Closure* done);
+  void Div(::google::protobuf::RpcController* controller,
+                       const ::example::rpcProto::OperaReqF* request,
+                       ::example::rpcProto::OperaResF* response,
+                       ::google::protobuf::Closure* done);
+ private:
+  ::google::protobuf::RpcChannel* channel_;
+  bool owns_channel_;
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Service2_Stub);
+};
+
+
 // ===================================================================
 
-static const int kGlobalServiceIdFieldNumber = 1000;
-extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::ServiceOptions,
-    ::google::protobuf::internal::PrimitiveTypeTraits< ::google::protobuf::uint32 >, 13, false >
-  global_service_id;
-static const int kLocalMethodIdFieldNumber = 1000;
-extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MethodOptions,
-    ::google::protobuf::internal::PrimitiveTypeTraits< ::google::protobuf::uint32 >, 13, false >
-  local_method_id;
 
 // ===================================================================
 
@@ -868,9 +1187,75 @@ inline void OperaRes::set_c(::google::protobuf::int64 value) {
   // @@protoc_insertion_point(field_set:example.rpcProto.OperaRes.c)
 }
 
+// -------------------------------------------------------------------
+
+// OperaReqF
+
+// required float a = 1;
+inline bool OperaReqF::has_a() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void OperaReqF::clear_a() {
+  a_ = 0;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline float OperaReqF::a() const {
+  // @@protoc_insertion_point(field_get:example.rpcProto.OperaReqF.a)
+  return a_;
+}
+inline void OperaReqF::set_a(float value) {
+  _has_bits_[0] |= 0x00000001u;
+  a_ = value;
+  // @@protoc_insertion_point(field_set:example.rpcProto.OperaReqF.a)
+}
+
+// required float b = 2;
+inline bool OperaReqF::has_b() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void OperaReqF::clear_b() {
+  b_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline float OperaReqF::b() const {
+  // @@protoc_insertion_point(field_get:example.rpcProto.OperaReqF.b)
+  return b_;
+}
+inline void OperaReqF::set_b(float value) {
+  _has_bits_[0] |= 0x00000002u;
+  b_ = value;
+  // @@protoc_insertion_point(field_set:example.rpcProto.OperaReqF.b)
+}
+
+// -------------------------------------------------------------------
+
+// OperaResF
+
+// required float c = 1;
+inline bool OperaResF::has_c() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void OperaResF::clear_c() {
+  c_ = 0;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline float OperaResF::c() const {
+  // @@protoc_insertion_point(field_get:example.rpcProto.OperaResF.c)
+  return c_;
+}
+inline void OperaResF::set_c(float value) {
+  _has_bits_[0] |= 0x00000001u;
+  c_ = value;
+  // @@protoc_insertion_point(field_set:example.rpcProto.OperaResF.c)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
