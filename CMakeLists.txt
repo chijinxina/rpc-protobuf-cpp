@@ -53,7 +53,7 @@ add_library(pbrpc
         protobufCoder/RpcMsgSerializeHandler.cc
         net/PbRpcClient.cc
         net/PbRpcServer.cc
-        net/futureRpcClient.cc
+        net/futureRpcCallProxy.cc
         )
 target_link_libraries(pbrpc
         ${WANGLE_LIBRARIES}

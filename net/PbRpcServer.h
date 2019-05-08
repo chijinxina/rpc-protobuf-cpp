@@ -84,9 +84,6 @@ private:
 };
 
 
-
-
-
 /*
  * protobuf RPC Server
  */

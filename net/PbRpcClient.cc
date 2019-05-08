@@ -57,7 +57,7 @@ RpcMsgClientSerializePipeline::Ptr RpcMsgPipelineFactory::newPipeline(std::share
 /*
  * PbRpcClient
  */
-//PbRpcClient 构造函数
+//PbRpcClient 构造函数 自定义IO线程池
 PbRpcClient::PbRpcClient(std::string host, int port, int ioThreadNum)
         :remoteAddress(host, port),
          pipeline(nullptr),
@@ -76,6 +76,21 @@ PbRpcClient::PbRpcClient(std::string host, int port, int ioThreadNum)
         //std::cout<<"ioThreadNum = "<<cpuNum<<std::endl;
     }
 
+    tcpClient.pipelineFactory(std::make_shared<RpcMsgPipelineFactory>());
+
+    dispatcher = std::make_shared<MultiplexClientDispatcher>();
+
+    //与rpc远程服务器建立连接（非阻塞）
+    connect();
+}
+
+//PbRpcClient 构造函数 指定IO线程池
+PbRpcClient::PbRpcClient(std::string host, int port, std::shared_ptr<folly::IOThreadPoolExecutor> ioThreadPool)
+         :remoteAddress(host, port),
+         pipeline(nullptr),
+         connected(false)
+{
+    tcpClient.group(ioThreadPool);
     tcpClient.pipelineFactory(std::make_shared<RpcMsgPipelineFactory>());
 
     dispatcher = std::make_shared<MultiplexClientDispatcher>();
@@ -118,6 +133,9 @@ void PbRpcClient::connect()
  * RpcChannel
  */
 //RpcChannel 构造函数
+RpcChannel::RpcChannel()
+{}
+
 RpcChannel::RpcChannel(PbRpcClient *client)
       : rpcClient(client), request_id(0)
 {}
@@ -131,7 +149,7 @@ void RpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method, go
                        const google::protobuf::Message *request, google::protobuf::Message *response,
                        google::protobuf::Closure *done) {
 
-    if(!rpcClient->connected)
+    if(!rpcClient->connected.load())
     {
         std::unique_lock<std::mutex>(this->connect_mu);
         rpcClient->pipeline = rpcClient->tcpClient.connect(rpcClient->remoteAddress).get();
@@ -162,7 +180,7 @@ void RpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method, go
         rpc::codec::RpcMessage Res = (*(rpcClient->dispatcher))(Req).get();
         response->ParseFromString( Res.response() );
     }
-        /*设置异步回调*/
+    /*设置异步回调*/
     else
     {
         //std::cout<<"Req id = "<<Req.id()<<std::endl;

@@ -54,6 +54,8 @@ public:
 class PbRpcClient {
 public:
     PbRpcClient(std::string host, int port, int ioThreadNum = 0);
+    PbRpcClient(std::string host, int port, std::shared_ptr<folly::IOThreadPoolExecutor> ioThreadPool);
+
     ~PbRpcClient();
 
 public:
@@ -83,6 +85,7 @@ private:
 class RpcChannel : public google::protobuf::RpcChannel {
 public:
     /*构造函数*/
+    RpcChannel();
     RpcChannel(PbRpcClient* client);
     RpcChannel(std::shared_ptr<PbRpcClient> client);
 
@@ -101,6 +104,9 @@ private:
 
     //互斥锁
     std::mutex connect_mu;
+
+    //IO线程池
+    //std::shared_ptr<folly::IOThreadPoolExecutor> threadPool;
 };
 
 

@@ -37,3 +37,7 @@ target_link_libraries(RpcServerTest
         pbrpc
         )
 
+
+add_executable(test1 test1.cc MyService.pb.cc)
+target_link_libraries(test1 pbrpc)
+
