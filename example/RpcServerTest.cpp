@@ -25,7 +25,7 @@ public:
         response->set_response( request->request() );
 
         cout<<"RPC Server Called MyService::Echo() "<< callCount++ <<endl;
-
+        
         if(done)
             done->Run();
     }
@@ -97,19 +97,31 @@ private:
     std::atomic_long callCount;
 };
 
-int main()
+
+/*
+ * RPC服务器主程序入口
+ */
+int main(int argc, char* argv[])
 {
     MyServiceImpl* myServiceImpl = new MyServiceImpl();
     Service2Impl*  service2Impl  = new Service2Impl();
 
     pbRPCServer rpc_server;
 
-    //RPC绑定服务
+    //RPC绑定服务 同一个端口可绑定多个服务
     rpc_server.RegisterService(myServiceImpl);
     rpc_server.RegisterService(service2Impl);
 
-    //启动RPC服务器 监听8888端口
-    rpc_server.Start(8888);
+    //启动RPC服务器 默认监听8888端口
+    if(argc < 1)
+    {
+        rpc_server.Start(8888);
+    }
+    else
+    {
+        int port = atoi(argv[1]);
+        rpc_server.Start(port);
+    }
 
     std::cout<<"RPC Server Stop!"<<std::endl;
 }

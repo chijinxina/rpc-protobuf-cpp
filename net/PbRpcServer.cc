@@ -149,7 +149,7 @@ void pbRPCServer::Start(int bindPort)
 
     tcpServer.bind(bindPort);
 
-    std::cout<<"RPC Server Start!"<<std::endl;
+    std::cout<<"RPC Server Start Running in Port: "<< bindPort <<std::endl;
 
     tcpServer.waitForStop();
 }

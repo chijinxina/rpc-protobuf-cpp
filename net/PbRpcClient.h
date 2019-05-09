@@ -104,9 +104,6 @@ private:
 
     //互斥锁
     std::mutex connect_mu;
-
-    //IO线程池
-    //std::shared_ptr<folly::IOThreadPoolExecutor> threadPool;
 };
 
 

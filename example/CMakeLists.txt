@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-######### RPC客户端测试 promise/future风格异步RPC调用 #######
+######### RPC客户端测试 同步RPC调用 #######
 add_executable(SyncRpcClientTest
         MyService.pb.cc
         SyncRpcClientTest.cpp
@@ -19,13 +19,13 @@ target_link_libraries(AsyncRpcClientTest
         )
 
 ########## RPC客户端测试 promise/future风格异步RPC调用 #######
-#add_executable(SyncRpcClientTest
-#        MyService.pb.cc
-#        AsyncRpcClientTest.cpp
-#        )
-#target_link_libraries(AsyncRpcClientTest
-#        pbrpc
-#        )
+add_executable(FutureRpcClientTest
+        MyService.pb.cc
+        FutureRpcClientTest.cc
+        )
+target_link_libraries(FutureRpcClientTest
+        pbrpc
+        )
 
 
 ################ RPC 服务器测试 ###########################
@@ -36,8 +36,4 @@ add_executable(RpcServerTest
 target_link_libraries(RpcServerTest
         pbrpc
         )
-
-
-add_executable(test1 test1.cc MyService.pb.cc)
-target_link_libraries(test1 pbrpc)
 

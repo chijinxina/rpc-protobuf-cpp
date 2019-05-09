@@ -27,7 +27,7 @@ int main()
 
     req->set_a(100);
     req->set_b(200);
-    a = myServiceCallProxy.CallMethod<example::rpcProto::OperaRes>("Add", req).get();
+    a = myServiceCallProxy.CallMethod<example::rpcProto::OperaRes>("123", req).get();
 
     cout<< a.c() <<endl;
 
