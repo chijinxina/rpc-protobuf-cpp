@@ -4,8 +4,11 @@
 
 
 ### 特性
+
 **TCP长连接纯异步RPC调用**
+
 **支持同一个端口注册多个服务**
+
 **提供3种风格的RPC客户端**
 1. google protobuf风格的同步调用RPC客户端
 2. google protobuf风格的异步调用RPC客户端
