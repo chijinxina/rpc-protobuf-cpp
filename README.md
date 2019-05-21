@@ -4,7 +4,7 @@
 
 
 ### 特性
-**1. 采用google protobuf消息序列化和反序列化机制，并用protobuf进行RPC服务的描述**
+**1. 采用google protobuf消息序列化和反序列化机制，并采用protobuf描述RPC服务**
 
 **2. TCP长连接纯异步RPC调用**
 
