@@ -58,6 +58,10 @@ message RpcMessage
 ```
 2. wangle中RPC消息序列化与反序列化处理Handler - protobufCoder/RpcMsgSerializeHandler.cc
 
+**相关工具 util:**
+1. string字符串分割 - StringUtil.cc
+2. 获取网卡IP地址 - LinuxNetworkUtil.cc
+
 **示例程序 example:**
 1. protobuf RPC定义文件  -  MyService.proto
 2. RPC服务器测试 - RpcServerTest.cpp
