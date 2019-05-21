@@ -15,7 +15,7 @@
 3. Future/Promise风格的RPC客户端调用代理 - futureRpcCallProxy.cc
 4. wangle service服务器/客户端消息分发器 - ServiceDispatcher 
 
-**wangle相关的网络消息编码器 codec： **
+**wangle相关的网络消息编码器 codec：**
 1. 上游定长消息解码器（消息头部包含消息长度）- codec/LengthFieldBasedFrameDecoder.cpp
 2. 下游定长消息编码器（计算消息长度并在头部添加长度域）- codec/LengthFieldPrepender.cpp
 
