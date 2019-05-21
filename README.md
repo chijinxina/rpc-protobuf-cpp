@@ -18,7 +18,7 @@
 3. Future/Promise风格的异步调用RPC客户端
 
 ### 源码编译及相关库依赖
-![rpc](https://github.com/chijinxina/rpc-protobuf-cpp/blob/master/doc/rpc.png){:height="100" width="100"}
+![rpc](https://github.com/chijinxina/rpc-protobuf-cpp/blob/master/doc/rpc.png)
 1. 安装folly组件库 [folly编译安装](https://github.com/facebook/folly)
 2. 安装wangle网络库 [wangle编译安装](https://github.com/facebook/wangle)
 3. 编译rpc-protobuf-cpp
