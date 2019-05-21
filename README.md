@@ -17,17 +17,17 @@
 ### 源码编译及包相关依赖
 
 ### 相关文件
-**RPC底层网络 net：**
+**1. RPC底层网络 net：**
 1. RPC客户端 - PbRpcClient.cc
 2. RPC服务器 - PbRpcServer.cc
 3. Future/Promise风格的RPC客户端调用代理 - futureRpcCallProxy.cc
 4. wangle service服务器/客户端消息分发器 - ServiceDispatcher 
 
-**wangle相关的网络消息编码器 codec：**
+**2. wangle相关的网络消息编码器 codec：**
 1. 上游定长消息解码器（消息头部包含消息长度）- codec/LengthFieldBasedFrameDecoder.cpp
 2. 下游定长消息编码器（计算消息长度并在头部添加长度域）- codec/LengthFieldPrepender.cpp
 
-**Protobuf消息编码器 protobufCoder：**
+**3. Protobuf消息编码器 protobufCoder：**
 1. rpc请求/响应消息的序列化编码文件  -  protobufCoder/RpcMessage.proto
 ```
 enum MsgType
@@ -63,11 +63,11 @@ message RpcMessage
 ```
 2. wangle中RPC消息序列化与反序列化处理Handler - protobufCoder/RpcMsgSerializeHandler.cc
 
-**相关工具 util:**
+**4. 相关工具 util:**
 1. string字符串分割 - StringUtil.cc
 2. 获取网卡IP地址 - LinuxNetworkUtil.cc
 
-**示例程序 example:**
+**5. 示例程序 example:**
 1. protobuf RPC定义文件  -  MyService.proto
 2. RPC服务器测试 - RpcServerTest.cpp
 3. protobuf风格的同步RPC客户端  -  SyncRpcClientTest.cpp
