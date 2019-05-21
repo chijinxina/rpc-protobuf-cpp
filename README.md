@@ -17,7 +17,7 @@
 2. google protobuf风格的异步调用RPC客户端
 3. Future/Promise风格的异步调用RPC客户端
 
-### 源码编译及包相关依赖
+### 源码编译及相关库依赖
 
 ### 相关文件
 **1. RPC底层网络 net：**
