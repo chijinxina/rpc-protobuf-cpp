@@ -18,6 +18,15 @@
 3. Future/Promise风格的异步调用RPC客户端
 
 ### 源码编译及相关库依赖
+安装wangle网络库，[wangle安装教程](https://github.com/facebook/wangle)
+···
+git clone --recursive https://github.com/chijinxina/rpc-protobuf-cpp.git
+cd rpc-protobuf-cpp
+mkdir build
+cd build
+cmake ..
+make
+···
 
 ### 相关文件
 **1. RPC底层网络 net：**
