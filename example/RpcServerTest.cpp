@@ -22,6 +22,9 @@ public:
     void Echo(::google::protobuf::RpcController *controller, const ::example::rpcProto::EchoReq *request,
               ::example::rpcProto::EchoRes *response, ::google::protobuf::Closure *done) override {
 
+        //模拟后端服务执行时间
+        //this_thread::sleep_for(std::chrono::milliseconds(50));
+
         response->set_response( request->request() );
 
         cout<<"RPC Server Called MyService::Echo() "<< callCount++ <<endl;
@@ -35,6 +38,9 @@ public:
     void Add(::google::protobuf::RpcController *controller, const ::example::rpcProto::OperaReq *request,
              ::example::rpcProto::OperaRes *response, ::google::protobuf::Closure *done) override {
 
+        //模拟后端服务执行时间
+        //this_thread::sleep_for(std::chrono::milliseconds(50));
+
         response->set_c( request->a() + request->b() );
 
         cout<<"RPC Server Called MyService::Add()  "<< callCount++ <<endl;
@@ -47,6 +53,9 @@ public:
     /* 实现 MyService::Sub() 方法 */
     void Sub(::google::protobuf::RpcController *controller, const ::example::rpcProto::OperaReq *request,
              ::example::rpcProto::OperaRes *response, ::google::protobuf::Closure *done) override {
+
+        //模拟后端服务执行时间
+        //this_thread::sleep_for(std::chrono::milliseconds(50));
 
         response->set_c( request->a() - request->b() );
 
@@ -113,7 +122,7 @@ int main(int argc, char* argv[])
     rpc_server.RegisterService(service2Impl);
 
     //启动RPC服务器 默认监听8888端口
-    if(argc < 1)
+    if(argc <= 1)
     {
         rpc_server.Start(8888);
     }

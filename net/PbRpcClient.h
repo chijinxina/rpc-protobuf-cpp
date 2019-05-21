@@ -55,7 +55,7 @@ class PbRpcClient {
 public:
     PbRpcClient(std::string host, int port, int ioThreadNum = 0);
     PbRpcClient(std::string host, int port, std::shared_ptr<folly::IOThreadPoolExecutor> ioThreadPool);
-
+    PbRpcClient(std::string host, int port, std::shared_ptr<folly::IOThreadPoolExecutor> ioThreadPool, uint64_t reqLimit, uint32_t t);
     ~PbRpcClient();
 
 public:
@@ -88,6 +88,7 @@ public:
     RpcChannel();
     RpcChannel(PbRpcClient* client);
     RpcChannel(std::shared_ptr<PbRpcClient> client);
+    ~RpcChannel();
 
 
     /*实现RpcChannel中的CallMethod方法*/

@@ -19,6 +19,7 @@ enum ErrorCode
     INVALID_REQUEST = 4; //错误请求
     INVALID_RESPONSE = 5;//错误响应
     TIMEOUT = 6;         //请求超时
+    PENDDING_LIMIT = 7;  //达到最大pending请求限制
 }
 
 message RpcMessage

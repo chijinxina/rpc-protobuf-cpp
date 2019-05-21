@@ -7,6 +7,7 @@
 
 #include <string>
 #include <memory>
+#include <folly/net/NetworkSocket.h>
 #include "net/PbRpcClient.h"
 
 class futureRpcCallProxy {
@@ -14,7 +15,7 @@ public:
     typedef std::shared_ptr<google::protobuf::Message> MessagePtr;
 
     enum LBStrategy {
-        RANDOM,        //负载均衡随机策略
+        RANDOM,      //负载均衡随机策略
         HASH,        //负载均衡Hash策略
         RoundRobin   //负载均衡轮询策略
     };
@@ -25,8 +26,12 @@ public:
     /*设置负载均衡策略*/
     void setLBStrategy(LBStrategy l);
 
-    /*添加RPC远程主机*/
-    void addRemoteHost(std::string host, int port);
+
+    /*添加RPC远程主机
+     *  t: RPC响应超时时间 ms
+     *  reqLimit: pending request numbers limit
+     */
+    void addRemoteHost(std::string host, int port, uint32_t t = 5000, uint64_t reqLimit = INT64_MAX);
 
     /*异步服务方法调用*/
     template < typename  T>
@@ -39,15 +44,15 @@ public:
         //找不到对应方法
         if(!pMetDes)
         {
-            std::cerr << "Cannot find Method: "<< method_name << " in Service: "<<pSvcDes->full_name()<<std::endl;
-            promise->setException(folly::make_exception_wrapper<std::logic_error>(" Cannot find Method"));
+            //std::cerr << "Cannot find Method: "<< method_name << " in Service: "<<pSvcDes->full_name()<<std::endl;
+            promise->setException(std::logic_error("RPC CALL ERROR: NO_METHOD"));
             return promise->getFuture();
         }
 
         if(vRpcClient.size() <= 0)
         {
-            std::cerr << "Available hosts lists is empty!" << std::endl;
-            promise->setException(folly::make_exception_wrapper<std::logic_error>("Available hosts lists is empty!"));
+            //std::cerr << "Available hosts lists is empty!" << std::endl;
+            promise->setException(std::runtime_error("RPC CALL ERROR: NO_AVAILABLE_RPCHOSTS"));
             return promise->getFuture();
         }
 
@@ -86,7 +91,7 @@ public:
         //负载均衡Hash策略
         else if(lbs == HASH)
         {
-            rpcClient = Hash_Select();
+            rpcClient = Hash_Select(LocalIPstr, serviceName, method_name);
         }
 
         //判断客户端是否与远程RPC服务器建立了连接
@@ -104,12 +109,37 @@ public:
         //向远程RPC服务器发起异步RPC调用
         (*(rpcClient->dispatcher))(Req)
                     .thenValue(
-                     //成功调用 返回响应结果
+                     //返回响应结果 判断响应状态
                         [promise](rpc::codec::RpcMessage Res)
                         {
-                            T response;
-                            response.ParseFromString( Res.response() );
-                            promise->setValue(std::move(response));
+                            //RPC成功调用返回响应
+                            if(Res.error() == rpc::codec::NO_ERROR)
+                            {
+                                T response;
+                                response.ParseFromString( Res.response() );
+                                promise->setValue(std::move(response));
+                            }
+                            //请求等待数据超过限制 拒绝服务
+                            else if(Res.error() == rpc::codec::PENDDING_LIMIT)
+                            {
+                                promise->setException(std::runtime_error("RPC CALL ERROR: PENDDING_LIMIT"));
+                            }
+                            //远程RPC请求超时
+                            else if(Res.error() == rpc::codec::TIMEOUT)
+                            {
+                                promise->setException(std::runtime_error("RPC CALL ERROR: REMOTE RESPONSE TIMEOUT"));
+                            }
+                            //错误的请求
+                            else if(Res.error() == rpc::codec::INVALID_REQUEST)
+                            {
+                                promise->setException(std::runtime_error("RPC CALL ERROR: INVALID_REQUEST"));
+                            }
+                            //其它异常
+                            else
+                            {
+                                promise->setException(std::runtime_error("RPC CALL ERROR"));
+                            }
+
                         })
                     //远程调用发生异常
                     .thenError(folly::tag_t<std::exception>{},
@@ -126,7 +156,7 @@ private:
     /*负载均衡轮询策略*/
     std::shared_ptr<PbRpcClient> RoundRobin_Select(long curReqId);  //轮询策略
     std::shared_ptr<PbRpcClient> Random_Select(long curReqId);
-    std::shared_ptr<PbRpcClient> Hash_Select();
+    std::shared_ptr<PbRpcClient> Hash_Select(std::string host, std::string service_name, std::string method_name);
 
 private:
     /*服务*/
@@ -149,6 +179,10 @@ private:
 
     /*负载均衡策略*/
     LBStrategy lbs;
+
+    /*本地IP地址*/
+    std::string LocalIPstr;
+    std::atomic_bool getLocalIP_flag;
 };
 
 

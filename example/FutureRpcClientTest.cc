@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <folly/init/Init.h>
 #include <google/protobuf/message.h>
 #include "net/PbRpcClient.h"
 #include "net/futureRpcCallProxy.h"
@@ -14,8 +15,15 @@ using namespace folly;
 using namespace example::rpcProto;
 
 
-int main()
+int main(int argc, char* argv[])
 {
+    /*
+     * 如果使用 folly::Future<T>::onTimeout()
+     * 需要在 main()中调用 folly::Init init(&argc, &argv)
+     * This usually means that either main() never called folly::init, or singleton was requested before main() (which is not allowed).
+     */
+    folly::Init init(&argc, &argv);
+
     RpcChannel c;   //无用  google::protobuf::service接口要求
 
     /*
@@ -40,17 +48,23 @@ int main()
     futureRpcCallProxy myServiceCallProxy(&rpc_myservice);
     futureRpcCallProxy service2CallProxy(&rpc_service2);
 
+    //设置负载均衡策略
+    //myServiceCallProxy.setLBStrategy(futureRpcCallProxy::HASH);
+
     //添加可用RPC服务器
     myServiceCallProxy.addRemoteHost("127.0.0.1", 8888);
-
     service2CallProxy.addRemoteHost("127.0.0.1", 8888);
-
     myServiceCallProxy.addRemoteHost("127.0.0.1", 9999);
-
     service2CallProxy.addRemoteHost("127.0.0.1", 9999);
 
+//    //指定超时时间
+//    myServiceCallProxy.addRemoteHost("127.0.0.1", 8888, 10);
+//    service2CallProxy.addRemoteHost("127.0.0.1", 8888, 10);
+//    myServiceCallProxy.addRemoteHost("127.0.0.1", 9999, 10);
+//    service2CallProxy.addRemoteHost("127.0.0.1", 9999, 10);
+
     int i = 0;
-    while(i < 10000000)
+    while(i < 100000)
     {
         //1. Test MyService::Echo()
         if(i%5 == 0)
@@ -66,6 +80,11 @@ int main()
                             [req](EchoRes res)
                             {
                                 cout<<"AsyncFuture call MyService::Echo() req: "<<req->request()<<"| res: "<<res.response()<<endl;
+                            })
+                    .thenError(folly::tag_t<std::exception>{},
+                            [](const std::exception& e)
+                            {
+                                std::cerr<<"Call MyService::Echo() ERROR --- "<< exceptionStr(e) <<std::endl;
                             });
         }
         //2. Test MyService::Add()
@@ -82,6 +101,11 @@ int main()
                             {
                                 cout<<"AsyncFuture call MyService::Add()  req: ";
                                 cout<<"a="<<req->a()<<", b="<<req->b()<<" | res: a+b="<<res.c()<<endl;
+                            })
+                    .thenError(folly::tag_t<std::exception>{},
+                            [](const std::exception& e)
+                            {
+                                std::cerr<<"Call MyService::Add() ERROR --- "<< exceptionStr(e) <<std::endl;
                             });
         }
         //3. Test MyService::Sub()
@@ -98,6 +122,11 @@ int main()
                             {
                                 cout<<"AsyncFuture call MyService::Sub()  req: ";
                                 cout<<"a="<<req->a()<<", b="<<req->b()<<" | res: a-b="<<res.c()<<endl;
+                            })
+                    .thenError(folly::tag_t<std::exception>{},
+                            [](const std::exception& e)
+                            {
+                                std::cerr<<"Call MyService::Sub() ERROR --- "<< exceptionStr(e) <<std::endl;
                             });
         }
         //4. Test Service2::Mul()
@@ -114,6 +143,11 @@ int main()
                             {
                                 cout<<"AsyncFuture call Service2::Mul()   req: ";
                                 cout<<"a="<<req->a()<<", b="<<req->b()<<" | res: a*b="<<res.c()<<endl;
+                            })
+                    .thenError(folly::tag_t<std::exception>{},
+                            [](const std::exception& e)
+                            {
+                                std::cerr<<"Call Service2::Mul() ERROR --- "<< exceptionStr(e) <<std::endl;
                             });
         }
         //5. Test Service2::Div()
@@ -130,9 +164,16 @@ int main()
                             {
                                 cout<<"AsyncFuture call Service2::Div()   req: ";
                                 cout<<"a="<<req->a()<<", b="<<req->b()<<" | res: a/b="<<res.c()<<endl;
+                            })
+                    .thenError(folly::tag_t<std::exception>{},
+                            [](const std::exception& e)
+                            {
+                                std::cerr<<"Call Service2::Div() ERROR --- "<< exceptionStr(e) <<std::endl;
                             });
         }
 
+
+        //this_thread::sleep_for(std::chrono::milliseconds(10));
         i++;
     }
 

@@ -91,11 +91,12 @@ enum ErrorCode {
   NO_METHOD = 3,
   INVALID_REQUEST = 4,
   INVALID_RESPONSE = 5,
-  TIMEOUT = 6
+  TIMEOUT = 6,
+  PENDDING_LIMIT = 7
 };
 bool ErrorCode_IsValid(int value);
 const ErrorCode ErrorCode_MIN = NO_ERROR;
-const ErrorCode ErrorCode_MAX = TIMEOUT;
+const ErrorCode ErrorCode_MAX = PENDDING_LIMIT;
 const int ErrorCode_ARRAYSIZE = ErrorCode_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ErrorCode_descriptor();

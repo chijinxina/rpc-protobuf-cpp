@@ -54,6 +54,8 @@ add_library(pbrpc
         net/PbRpcClient.cc
         net/PbRpcServer.cc
         net/futureRpcCallProxy.cc
+        util/StringUtil.cc
+        util/LinuxNetworkUtil.cc
         )
 target_link_libraries(pbrpc
         ${WANGLE_LIBRARIES}

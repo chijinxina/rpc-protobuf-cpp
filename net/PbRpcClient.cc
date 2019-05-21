@@ -99,12 +99,30 @@ PbRpcClient::PbRpcClient(std::string host, int port, std::shared_ptr<folly::IOTh
     connect();
 }
 
+//PbRpcClient 构造函数 指定IO线程池 指定最大pending请求数量 指定响应超时时间
+PbRpcClient::PbRpcClient(std::string host, int port, std::shared_ptr<folly::IOThreadPoolExecutor> ioThreadPool,
+                         uint64_t reqLimit, uint32_t t)
+        :remoteAddress(host, port),
+         pipeline(nullptr),
+         connected(false)
+{
+
+    tcpClient.group(ioThreadPool);
+    tcpClient.pipelineFactory(std::make_shared<RpcMsgPipelineFactory>());
+
+    //指定最大pending请求数量 和 响应超时时间
+    dispatcher = std::make_shared<MultiplexClientDispatcher>(reqLimit, t);
+
+    //与rpc远程服务器建立连接（非阻塞）
+    connect();
+}
+
 //析构函数
 PbRpcClient::~PbRpcClient()
 {
     //同步地等待连接关闭
     this->pipeline->close().get();
-    delete this->pipeline;
+    //delete this->pipeline;
 }
 
 //异步连接远程rpc服务器
@@ -144,6 +162,10 @@ RpcChannel::RpcChannel(std::shared_ptr<PbRpcClient> client)
       : rpcClient(client), request_id(0)
 {}
 
+//RpcChannel 析构函数
+RpcChannel::~RpcChannel()
+{}
+
 //实现RpcChannel中的CallMethod方法
 void RpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method, google::protobuf::RpcController *controller,
                        const google::protobuf::Message *request, google::protobuf::Message *response,
@@ -154,7 +176,7 @@ void RpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method, go
         std::unique_lock<std::mutex>(this->connect_mu);
         rpcClient->pipeline = rpcClient->tcpClient.connect(rpcClient->remoteAddress).get();
         rpcClient->dispatcher->setPipeline(rpcClient->pipeline);
-        rpcClient->connected = false;
+        rpcClient->connected = true;
     }
 
     //获取service id 进行farmhash运算 将service name 转为 uint32
