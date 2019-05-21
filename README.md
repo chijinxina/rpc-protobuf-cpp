@@ -4,12 +4,13 @@
 
 
 ### 特性
+**1. 采用google protobuf消息序列化和反序列化机制，并用protobuf进行RPC服务的描述**
 
-**1. TCP长连接纯异步RPC调用**
+**2. TCP长连接纯异步RPC调用**
 
-**2. 支持同一个端口注册多个服务**
+**3. 支持在同一个端口绑定多个服务**
 
-**3. 提供3种风格的RPC客户端**
+**4. 提供3种风格的RPC客户端**
 1. google protobuf风格的同步调用RPC客户端
 2. google protobuf风格的异步调用RPC客户端
 3. Future/Promise风格的异步调用RPC客户端
