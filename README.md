@@ -10,7 +10,9 @@
 
 **3. 支持在同一个端口绑定多个服务**
 
-**4. 提供3种风格的RPC客户端**
+**4. 对服务名称进行hash计算服务的hashcode**
+
+**5. 提供3种风格的RPC客户端**
 1. google protobuf风格的同步调用RPC客户端
 2. google protobuf风格的异步调用RPC客户端
 3. Future/Promise风格的异步调用RPC客户端
