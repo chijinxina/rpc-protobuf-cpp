@@ -1,6 +1,6 @@
 # rpc-protobuf-cpp
 
-### 基于[wangle](https://github.com/facebook/wangle)框架和[google protobuf](https://github.com/protocolbuffers/protobuf)序列化框架实现的CPP版高性能RPC框架
+### 基于[wangle](https://github.com/facebook/wangle)框架和[google protobuf](https://github.com/protocolbuffers/protobuf)序列化框架实现的C++版高性能RPC框架
 
 
 ### 特性
